@@ -21,7 +21,7 @@
             video.src = "data:image/jpeg;base64," + data.frame_bytes;
 
             // Update JSON response below the video stream
-            jsonResponseDiv.innerText = JSON.stringify(data, null, 2);
+            jsonResponseDiv.innerText = JSON.stringify(data.accuracy, null, 2);
         };
 
         controlSocket.onclose = (event) => {

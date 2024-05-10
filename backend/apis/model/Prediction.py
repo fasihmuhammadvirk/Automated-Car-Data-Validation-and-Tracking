@@ -11,7 +11,7 @@ INPUT_HEIGHT = 640
 
 def get_detections(img):
     
-    onnx_file_path = '/Users/fasihmuhammad/Desktop/FYP Code/Final FYP App/backend/model/best.onnx'
+    onnx_file_path = '/Users/fasihmuhammad/Desktop/Github/Automated-Car-Data-Validation-and-Tracking/backend/apis/model/best.onnx'
     net = cv2.dnn.readNetFromONNX(onnx_file_path)
     # # LOAD YOLO MODEL
     # net = cv2.dnn.readNetFromONNX('')
@@ -113,17 +113,16 @@ def extract_plate(image, bbox, target_height=800):
 
 
 # predictions
-def yolo_predictions(img):
+def yolo_predictions(image):
 
-    image = cv2.imread(img)
+    # image = cv2.imread(img)
     # step-1: detections
     input_image, detections = get_detections(image)
     # step-2: NMS
-    boxes_np, confidences_np, index = non_maximum_supression(
-        input_image, detections)
+    boxes_np, confidences_np, index = non_maximum_supression(input_image, detections)
     
-    plate = extract_plate(image, boxes_np[0])
+    # plate = extract_plate(image, boxes_np[0])
     # step-3: drawings
     rect_image, acc = drawings(image, boxes_np, confidences_np, index)
     
-    return rect_image, plate, acc
+    return rect_image, acc
