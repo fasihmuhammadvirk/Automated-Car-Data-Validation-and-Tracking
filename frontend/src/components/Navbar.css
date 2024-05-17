@@ -1,0 +1,45 @@
+.navbar {
+  width: auto;
+  display: flex;
+  align-items: center;
+  height: 6.25rem;
+  background: rgba(34, 73, 87, 0.8);
+}
+
+.navbar-logo{
+  display: flex;
+  align-items: center;
+  margin-left: 1.5rem;
+}
+
+.navbar .navbar-logo span {
+  width: 19.625rem;
+  height: 2.875rem;
+  color: #fff;
+  text-align: center;
+  font-family: "Lexend Deca";
+  font-size: 1.875rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.navbar .navbar-links {
+  display: flex;
+  align-items: center;
+  margin-right: 1.5rem;
+  margin-bottom: 0.5rem;
+    text-decoration: none; 
+}
+
+.navbar .navbar-links #link {
+    color: #FFF;
+    margin: 1rem;
+    text-align: center;
+    font-family: "Lexend Deca";
+    font-size: 1.375rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    text-decoration: none; 
+}
