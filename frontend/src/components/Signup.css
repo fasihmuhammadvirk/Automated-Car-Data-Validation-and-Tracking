@@ -1,0 +1,96 @@
+.Signup {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    height: 45rem;
+  }
+  .Signup .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  
+  }
+  
+  .Signup .container #title {
+    color: #fff;
+    text-align: center;
+    font-family: "Lexend Deca";
+    font-size: 4rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-bottom: 0.5rem;
+  }
+  
+  .Signup .container #description {
+    color: #fff;
+    text-align: center;
+    font-family: "Lexend Deca";
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 200;
+    line-height: normal;
+  }
+  
+  .Signup .container input {
+    width: 18.75rem;
+    height: 2.8125rem;
+    margin-bottom: 0.625rem;
+    border: none; /* Remove border */
+    border-radius: 0.625rem;
+    background: rgba(34, 73, 87, 0.8);
+    padding-left: 1rem;
+    margin: 1rem;
+  }
+  
+  /* Styling the placeholder */
+  .Signup .container input::placeholder {
+    color: #fff; /* White placeholder text */
+    text-align: left;
+    font-family: "Lexend Deca";
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.25rem;
+  }
+  
+  .Signup .container .signuplink .link {
+    color: #fff;
+    text-align: center;
+    font-family: "Montserrat";
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+    text-decoration: none; /* Remove underline from link */
+    margin-bottom: 1rem;
+  }
+  
+  .Signup .container .signuplink {
+    display: flex;
+    justify-content: flex-end; /* Position the link to the right side */
+    width: 18.75rem;
+  }
+  
+  .Signup .container .button {
+    width: 18.75rem;
+    height: 2.8125rem;
+    flex-shrink: 0;
+    border-radius: 0.625rem;
+    background: #20df7f;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.3);
+    color: #224957;
+    text-align: center;
+    font-family: "Lexend Deca";
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.25rem; /* 125% */
+    text-transform: capitalize;
+    cursor: pointer;
+  }
+  

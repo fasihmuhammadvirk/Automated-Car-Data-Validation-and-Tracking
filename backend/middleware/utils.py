@@ -35,21 +35,22 @@ def jwt_encode(payload: dict, secret_key: str, algorithm: str) -> str:
     return f"{encoded_jwt}.{signature}"
 
 
-def decode_access_token(token: str, user_name: str):
-    is_user = False
+def decode_access_token(token: str):
+    # is_user = False
 
-    try:
-        # Decode the JWT token
-        encoded_jwt, signature = token.split('.')
-        decoded_payload = base64.urlsafe_b64decode(encoded_jwt + "==").decode()
-        user_id = decoded_payload
-        # No expiration time check needed
-        if user_name == user_id:
-            is_user = True
+    # try:
+    # Decode the JWT token
+    encoded_jwt, signature = token.split('.')
+    decoded_payload = base64.urlsafe_b64decode(encoded_jwt + "==").decode()
+    user_id = decoded_payload 
+    # # No expiration time check needed
+    # if user_name == user_id:
+    #     is_user = True
+    user_id = json.loads(user_id)
+    user_id = user_id['sub']
+    # except Exception as e:
+    #     # Handle exceptions``
+    #     print(f"Error decoding token: {e}")
+    #     is_user = False
 
-    except Exception as e:
-        # Handle exceptions
-        print(f"Error decoding token: {e}")
-        is_user = False
-
-    return is_user
+    return user_id

@@ -1,0 +1,89 @@
+.notifications {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.notifications .container {
+  flex-shrink: 0;
+  border-radius: 5px;
+  background: #6b828b;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset,
+    0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  margin-top: 5rem;
+}
+
+.notifications .container h2 {
+  width: 1102px;
+  height: 70px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  background: rgba(34, 73, 87, 0.8);
+  margin: 0;
+  padding-left: 1rem;
+  color: #fff;
+  font-family: "Lexend Deca";
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.notifications .container .table {
+  max-height: 550px; /* Adjust the height as needed */
+  overflow-y: auto;
+  border-top: none;
+  border-radius: 5px;
+  background: #6b828b;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset,
+    0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.notifications .container .table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.notifications .container .table tbody {
+  background: #f5f5f5;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+td {
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.author {
+    color: #000;
+    text-align: center;
+    font-family: "Lexend Deca";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.message {
+  color: #514848;
+text-align: center;
+font-family: "Lexend Deca";
+font-size: 18px;
+font-style: normal;
+font-weight: 300;
+line-height: normal;
+}
+
+.status {
+  text-align: right;
+}
+
+.dot {
+  height: 10px;
+  width: 10px;
+  background-color: red;
+  border-radius: 50%;
+  display: inline-block;
+}

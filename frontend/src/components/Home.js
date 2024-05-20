@@ -1,8 +1,8 @@
 import React from "react";
 import "./Home.css";
-import UserLogo from "../asserts/User.png";
-import Circle from "../asserts/Ellipse.png";
-import Author from "../asserts/Author.png";
+import UserLogo from "../assets/User.png";
+import Circle from "../assets/Ellipse.png";
+import Author from "../assets/Author.png";
 import { Link } from "react-router-dom";
 
 export default function Home() {

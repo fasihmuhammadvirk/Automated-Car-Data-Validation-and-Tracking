@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./UserDashboard.css";
 import Navbar from "./Navbar.js";
-import Plus from "../asserts/Plus.png";
+import Plus from "../assets/Plus.png";
 
 export default function UserDashboard() {
   const [carNumberPlate, setCarNumberPlate] = useState("");

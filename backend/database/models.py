@@ -39,11 +39,6 @@ class User_Info(Base):
     name = Column(String(100),nullable = False)
     cnic = Column(String(100),nullable = False,unique = True) 
     hash_password = Column(String(400),nullable=False) 
-    jwt_token = Column(String(400),default = None)   
-    
-    
-      
-
     
     def to_dict(self):
         
@@ -56,3 +51,18 @@ class User_Info(Base):
     def __repr__(self):
         return f"<User Id { self.id } User Cnic {self.cnic}>"
 
+
+class Admin_Info(Base):
+    
+    __tablename__ = "admin_info"
+    
+    id = Column(Integer(),primary_key=True) 
+    official_id = Column(String(100),nullable = False)
+    hash_password = Column(String(400),nullable=False) 
+    
+    
+    def to_dict(self):
+        
+        return {
+            'official_id': self.official_id,
+            'hash_password': self.hash_password}
