@@ -1,1 +1,5 @@
 frontend/node_modules
+backend/app/objectdetection/test_images
+backend/app/objectdetection/best.onnx
+backend/app/objectdetection/craft_mlt_25k.pth
+backend/app/objectdetection/english_g2.pth

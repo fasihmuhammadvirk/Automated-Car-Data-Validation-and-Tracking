@@ -52,6 +52,12 @@ margin-top: 2rem;
 text-decoration: none; /* Remove underline from link */
 }
 
+.Home .container .button:hover {
+    background: #20df7f;
+    color: #224957;
+    transition: all 0.3s ease-in;
+}
+
 .Home .container .button .left {
     display: flex;
     align-items: center; /* Centers the items vertically */

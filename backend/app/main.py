@@ -12,6 +12,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 # Include routers
 app.include_router(user_views.router)
 app.include_router(admin_views.router)
