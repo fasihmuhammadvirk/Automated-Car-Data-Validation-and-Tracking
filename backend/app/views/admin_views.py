@@ -1,17 +1,11 @@
 from fastapi import APIRouter, Depends, status
 from controllers import admin_controller 
 from typing import List
-from pydantic import BaseModel
+from models.admin_model import SignupInfo, LoginInfo
 
 router = APIRouter()
 
-class SignupInfo(BaseModel):
-    official_id: str
-    password: str
 
-class LoginInfo(BaseModel):
-    official_id: str
-    password: str
 
 @router.post('/signupauthor', status_code=status.HTTP_201_CREATED, tags=['Author Signup - Login'])
 def signup(Admin_Info: SignupInfo):

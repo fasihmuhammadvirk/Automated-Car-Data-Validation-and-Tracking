@@ -30,12 +30,12 @@ def perform_ocr(image):
     """Perform OCR on the image to extract the number plate text."""
     # Convert image to grayscale
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    # # Configure SSL context to use certifi certificates
-    # ssl_context = ssl.create_default_context(cafile=certifi.where())
-    # opener = urllib.request.build_opener(urllib.request.HTTPSHandler(context=ssl_context))
-    # urllib.request.install_opener(opener)
+    # Configure SSL context to use certifi certificates
+    ssl_context = ssl.create_default_context(cafile=certifi.where())
+    opener = urllib.request.build_opener(urllib.request.HTTPSHandler(context=ssl_context))
+    urllib.request.install_opener(opener)
     # Initialize EasyOCR reader with GPU support
-    reader = easyocr.Reader(['en'],download_enabled=True,model_storage_directory= '/Users/fasihmuhammadvirk/Desktop/Github/Automated-Car-Data-Validation-and-Tracking/backend/objectdetection/', gpu=True) 
+    reader = easyocr.Reader(['en'],download_enabled=True,model_storage_directory= '/Users/fasihmuhammadvirk/Desktop/Github/Automated-Car-Data-Validation-and-Tracking/backend/app/objectdetection/', gpu=True) 
         # Configure SSL context to use certifi certificates
 
     # Perform OCR

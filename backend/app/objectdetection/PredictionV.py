@@ -163,7 +163,7 @@ INPUT_WIDTH = 640
 INPUT_HEIGHT = 640
 
 # Load the ONNX model
-onnx_file_path = '/Users/fasihmuhammadvirk/Desktop/Test FYP/model/best.onnx'
+onnx_file_path = '/Users/fasihmuhammadvirk/Desktop/Github/Automated-Car-Data-Validation-and-Tracking/backend/app/objectdetection/best.onnx'
 onnx_model = onnx.load(onnx_file_path)
 onnx.checker.check_model(onnx_model)
 

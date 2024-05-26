@@ -9,7 +9,7 @@
     margin-top: 10rem;
 }
 
-.report .container .heading p{
+.report .container .heading p, .report .container p{
 
     height: 46px;
     flex-shrink: 0;

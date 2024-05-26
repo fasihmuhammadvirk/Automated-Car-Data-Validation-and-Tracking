@@ -24,7 +24,7 @@ def verify_password(password: str, hashed_pass: str) -> bool:
     return password_context.verify(password, hashed_pass)
 
 def create_access_token(subject: Union[str, Any]) -> str:
-    to_encode = {"sub": str(subject)}
+    to_encode = {"cnic": str(subject[0]),"number_plate": str(subject[1])}
     encoded_jwt = jwt_encode(to_encode, JWT_SECRET_KEY, ALGORITHM)
     return encoded_jwt
 
@@ -47,7 +47,6 @@ def decode_access_token(token: str):
     # if user_name == user_id:
     #     is_user = True
     user_id = json.loads(user_id)
-    user_id = user_id['sub']
     # except Exception as e:
     #     # Handle exceptions``
     #     print(f"Error decoding token: {e}")

@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, Column, Integer, String, Date, Boolean, inspect
+from sqlalchemy import create_engine, Column, Integer, String, Date, Boolean, inspect, Text
 from sqlalchemy.orm import declarative_base
 from sqlalchemy import Column,String,Integer,DateTime,Boolean,UniqueConstraint
 Base = declarative_base() #this will be inherited by our schema
@@ -38,8 +38,9 @@ class User_Info(Base):
     id = Column(Integer(),primary_key=True) 
     name = Column(String(100),nullable = False)
     cnic = Column(String(100),nullable = False,unique = True) 
-    hash_password = Column(String(400),nullable=False) 
-    
+    hash_password = Column(String(400),nullable=False)
+    notifications = Column(Text, nullable=True)  # New field for user messages/notifications
+
     def to_dict(self):
         
         return {
