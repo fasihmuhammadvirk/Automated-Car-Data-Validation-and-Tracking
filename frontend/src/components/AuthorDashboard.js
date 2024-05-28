@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import "./AuthorDashboard.css";
 import Navbar from "./Navbar.js";
 import logo from "../assets/logos.png";
+import axios from "axios";
 export default function AuthorDashboard() {
 const videoRef = useRef(null);
 const [streaming, setStreaming] = useState(false);
@@ -13,9 +14,15 @@ const [streaming, setStreaming] = useState(false);
   };
 
   const stopStreaming = () => {
-    const videoElement = videoRef.current;
-    videoElement.src = logo;
-    setStreaming(false);
+    axios.get("http://localhost:8000/author/stop_feed")
+    .then(response => {
+      const videoElement = videoRef.current;
+      videoElement.src = logo;
+      setStreaming(false);
+    })
+    .catch(error => {
+      console.error("Error stopping video stream:", error);
+    });
   };
 
   return (

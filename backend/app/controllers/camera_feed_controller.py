@@ -1,4 +1,4 @@
-from fastapi import FastAPI, WebSocket
+from fastapi import FastAPI, WebSocket,HTTPException, status
 from fastapi.responses import HTMLResponse
 from objectdetection.PredictionV import yolo_predictions, get_number_plate
 import cv2
@@ -50,10 +50,9 @@ class VideoStreamDataController:
             self.cap = None
 
 
-def generate_video_stream():
-    cap = cv2.VideoCapture(0)
-    while cap.isOpened():
-        ret, frame = cap.read()
+def generate_video_stream(video_stream):   
+    while video_stream is not None:
+        ret, frame = video_stream.read()
         if not ret:
             break
 
@@ -68,6 +67,4 @@ def generate_video_stream():
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
-    cap.release()
-            
 video_stream_data_controller = VideoStreamDataController()
