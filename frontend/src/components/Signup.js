@@ -17,7 +17,7 @@ export default function Signup(props) {
     try {
       let response;
       if (props.name === "user") {
-        response = await axios.post("http://127.0.0.1:8000/signupuser", {
+        response = await axios.post("http://127.0.0.1:8000/user/signup", {
           name,
           cnic,
           password,
@@ -35,7 +35,7 @@ export default function Signup(props) {
           navigate("/userdashboard");
         }
       } else if (props.name === "author") {
-        response = await axios.post("http://127.0.0.1:8000/signupauthor", {
+        response = await axios.post("http://127.0.0.1:8000/author/signup", {
           officialId,
           password,
         });

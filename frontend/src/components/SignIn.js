@@ -13,7 +13,7 @@ export default function SignIn(props) {
     try {
       let response;
       if (props.name === "user") {
-        response = await axios.post("http://127.0.0.1:8000/loginuser", {
+        response = await axios.post("http://127.0.0.1:8000/user/login", {
           cnic: credential,
           password,
         });
@@ -29,7 +29,7 @@ export default function SignIn(props) {
           navigate("/userdashboard");
         }
       } else if (props.name === "author") {
-        response = await axios.post("http://127.0.0.1:8000/loginauthor", {
+        response = await axios.post("http://127.0.0.1:8000/author/login", {
           official_id: credential,
           password,
         }); 

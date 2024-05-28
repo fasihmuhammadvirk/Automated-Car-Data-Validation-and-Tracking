@@ -11,3 +11,6 @@ class SignupInfo(BaseModel):
 class LoginInfo(BaseModel):
     official_id: str
     password: str
+    
+class CheckFeed(BaseModel):
+    value : int

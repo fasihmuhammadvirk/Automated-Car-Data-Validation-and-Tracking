@@ -12,4 +12,5 @@ def get_user_notifications(notification: dict):
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
     notifications = user.notifications.split('\n') if user.notifications else []
+    notifications.reverse()
     return {'notifications': notifications}

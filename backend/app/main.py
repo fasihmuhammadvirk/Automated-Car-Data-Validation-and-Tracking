@@ -14,8 +14,8 @@ app.add_middleware(
 )
 
 # Include routers
-app.include_router(user_views.router)
-app.include_router(admin_views.router)
+app.include_router(user_views.router,prefix="/user")
+app.include_router(admin_views.router,prefix="/author")
 
 
 

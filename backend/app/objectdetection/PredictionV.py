@@ -260,13 +260,16 @@ def get_number_plate(image):
     # Preprocess image
     result_image, plate_image, acc = yolo_predictions(image)
     text = perform_ocr(plate_image)
-    return text
+    if text:
+        return acc ,text
+    else:
+        return 0, 'Number Plate Not Detected'
 
 
 
 
-def process_video(input_video_path):
-    cap = cv2.VideoCapture(input_video_path)
+def process_video():
+    cap = cv2.VideoCapture(0)
     frame_counter = 0  # Counter to keep track of processed frames
 
     while cap.isOpened():
@@ -304,5 +307,3 @@ def process_video(input_video_path):
 
 # input_video = '/Users/fasihmuhammadvirk/Desktop/Github/Automated-Car-Data-Validation-and-Tracking/backend/objectdetection/test_images/traffic.mp4'
 # process_video(input_video)
-
-
