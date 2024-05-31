@@ -1,6 +1,7 @@
 from fastapi import FastAPI, WebSocket,HTTPException, status
 from fastapi.responses import HTMLResponse
 from objectdetection.PredictionV import yolo_predictions, get_number_plate
+from objectdetection.ocr2 import perform_ocr
 import cv2
 import base64
 import json 
@@ -20,34 +21,20 @@ def get_car_data(number_plate : str):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="No Car Detail to Fetch")
     return db_car
 
+def get_number_plate(video_stream):
+    while video_stream is not None:
+        ret, frame = video_stream.read()
+        if not ret:
+            break
+        result_image, plate_image, acc = yolo_predictions(frame)
 
-class VideoStreamDataController:
-    def __init__(self):
-        self.cap = None
-
-    async def start_stream(self, websocket: WebSocket):
-        self.cap = cv2.VideoCapture(0)
-        while self.cap.isOpened():
-            ret, frame = self.cap.read()
-            
-            if ret:
-                frame_counter += 1
-                result_image, plate_image, acc = yolo_predictions(frame)
-                if isinstance(result_image, str):
-                    await websocket.send_text(result_image)
-                else:
-                    if acc >= 60 and frame_counter % 10 == 0:
-                        result_text = get_number_plate(plate_image)
-                        car_data = get_car_data(result_text)
-                        await websocket.send_text(json.dumps(car_data))
-            else:
-                await websocket.send_text("Camera error")
-                break
-
-    def stop_stream(self):
-        if self.cap:
-            self.cap.release()
-            self.cap = None
+        if isinstance(result_image, str):
+            pass
+        else:
+            if acc >= 60:
+                text = perform_ocr(plate_image)
+                car_data = get_car_data(text)
+                return car_data
 
 
 def generate_video_stream(video_stream):   
@@ -66,5 +53,3 @@ def generate_video_stream(video_stream):
         frame = buffer.tobytes()
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
-
-video_stream_data_controller = VideoStreamDataController()

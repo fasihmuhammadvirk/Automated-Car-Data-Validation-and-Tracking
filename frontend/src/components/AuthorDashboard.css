@@ -33,11 +33,11 @@ margin-bottom: 0.1rem;
 
 .dashboard .camera-feed .button-container {
     bottom: 20px;
+flex-direction: column;
     display: flex;
     width: 20%;
     justify-content: center;
     align-items: center;
-    ;
 }
 
 

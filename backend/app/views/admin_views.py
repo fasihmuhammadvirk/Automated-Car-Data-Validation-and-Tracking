@@ -3,7 +3,7 @@ from controllers import admin_controller
 from typing import List
 from models.admin_model import SignupInfo, LoginInfo, CheckFeed
 from fastapi.responses import StreamingResponse
-from controllers.camera_feed_controller import generate_video_stream
+from controllers.camera_feed_controller import generate_video_stream, get_number_plate
 import asyncio
 
 router = APIRouter()
@@ -19,14 +19,6 @@ def login(Admin_Info: LoginInfo):
     # Only 'cnic' and 'password' are required for login
     return admin_controller.login_author(Admin_Info.dict())
 
-# @router.get('/video_feed', status_code=status.HTTP_200_OK, tags=['Video Feed'])
-# def video_feed():
-#     return StreamingResponse(generate_video_stream(0), media_type='multipart/x-mixed-replace; boundary=frame')
-
-# @router.get('/stop_feed', status_code=status.HTTP_200_OK, tags=['Video Feed'])
-# def stop():
-#     generate_video_stream(1)
-#     return  {"message": "Video stream stopped"}
 import cv2
 video_stream = None
 
@@ -45,16 +37,7 @@ async def stop_video_feed():
         video_stream = None
     return 'Video stream stopped successfully.'
         
-# @router.get("/datafeed")
-# async def websocket_data_endpoint(websocket:WebSocket):
-#     await websocket.accept()
-#     try:
-#         while True:
-#             data = await websocket.receive_text()
-#             if data == 'start':
-#                 await video_stream_data_controller.start_stream(websocket)
-#             elif data == 'stop':
-#                 video_stream_data_controller.stop_stream()
-#     except:
-#         video_stream_data_controller.stop_stream()
-#         await websocket.close()
+
+@router.get('/get_car_data', status_code=status.HTTP_200_OK, tags=['Car Detail'])
+def get_car_data():
+    return get_number_plate(video_stream)
