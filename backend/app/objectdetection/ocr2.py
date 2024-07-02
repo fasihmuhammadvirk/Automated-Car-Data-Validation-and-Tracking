@@ -35,11 +35,11 @@ def perform_ocr(image):
     opener = urllib.request.build_opener(urllib.request.HTTPSHandler(context=ssl_context))
     urllib.request.install_opener(opener)
     # Initialize EasyOCR reader with GPU support
-    reader = easyocr.Reader(['en'],download_enabled=True,model_storage_directory= '/Users/fasihmuhammadvirk/Desktop/Github/Automated-Car-Data-Validation-and-Tracking/backend/app/objectdetection/', gpu=True) 
+    reader = easyocr.Reader(['en'],download_enabled=True,model_storage_directory= '/Users/fasihmuhammadvirk/Desktop/Github/Automated-Car-Data-Validation-and-Tracking/backend/objectdetection/', gpu=True) 
         # Configure SSL context to use certifi certificates
 
     # Perform OCR
-    results = reader.readtext(gray)
+    results = reader.readtext(gray,batch_size=100)
     # largest_boxes = sorted(results, key=lambda x: (x[0][2][0] - x[0][0][0]) * (x[0][2][1] - x[0][0][1]), reverse=True)[:2]
     
     largest_boxes = [(0, '')] * 2
@@ -64,5 +64,16 @@ def perform_ocr(image):
     # plate = ''.join(replace_city_name(box[1]) for box in largest_boxes)
     cleaned_text = remove_special_characters(plate)
     
-    return cleaned_text
+    return cleaned_text.upper()
 
+
+# image = '/Users/fasihmuhammadvirk/Desktop/Github/Automated-Car-Data-Validation-and-Tracking/backend/objectdetection/test_images/image3.jpeg'
+# import time 
+# start_time = time.time()
+# image = cv2.imread(image)
+# print(perform_ocr(image))
+# end_time = time.time()
+
+# elapsed_time = end_time - start_time
+
+# print(f"Elapsed time: {elapsed_time:.2f} seconds")

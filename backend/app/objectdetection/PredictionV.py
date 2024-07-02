@@ -241,7 +241,8 @@ def yolo_predictions(image):
     if len(indices) > 0:
         best_box = boxes[indices[0]]
         acc = confidences[indices[0]] * 100
-        plate_image = extract_plate(image, best_box)
+        plate_image = None
+        # plate_image = extract_plate(image, best_box)
         
         # Draw bounding boxes on the original image
         for box in boxes:
@@ -266,6 +267,9 @@ def get_number_plate(image):
         return 0, 'Number Plate Not Detected'
 
 
+
+# acc , text = get_number_plate('/Users/fasihmuhammadvirk/Downloads/3.jpeg')
+# print(text.upper())
 
 
 def process_video():

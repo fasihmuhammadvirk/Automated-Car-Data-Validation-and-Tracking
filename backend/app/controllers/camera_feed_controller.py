@@ -18,7 +18,8 @@ db = Session()
 def get_car_data(number_plate : str):
     db_car = db.query(Car_Record).filter(Car_Record.number_plate == number_plate ).first()
     if not db_car:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="No Car Detail to Fetch")
+        return {'number_plate': number_plate,
+                'message': "No Car Detail to Fetch"}
     return db_car
 
 def get_number_plate(video_stream):
@@ -32,9 +33,10 @@ def get_number_plate(video_stream):
             pass
         else:
             if acc >= 60:
-                text = perform_ocr(plate_image)
+                text = perform_ocr(frame)
                 car_data = get_car_data(text)
-                return car_data
+                if car_data:
+                    return car_data
 
 
 def generate_video_stream(video_stream):   

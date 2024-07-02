@@ -40,6 +40,12 @@
     width: 18.75rem;
     height: 2.8125rem;
     margin-bottom: 0.625rem;
+    font-family: "Lexend Deca";
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    color:#d9d9d9;
     border: none; /* Remove border */
     border-radius: 0.625rem;
     background: rgba(34, 73, 87, 0.8);

@@ -34,6 +34,7 @@
 
 .navbar .navbar-links #link {
     color: #FFF;
+    width: 10rem;
     margin: 1rem;
     text-align: center;
     font-family: "Lexend Deca";

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Signup.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import cookies from "js-cookie";
 
@@ -10,8 +10,10 @@ export default function Signup(props) {
   const [cnic, setCnic] = useState("");
   const [password, setPassword] = useState("");
   const [number_plate, setCarNumberPlate] = useState("");
+  const [location, setLocation] = useState("");
+  const [contact, setContact] = useState("");
 
-  const navigate = useNavigate();
+
 
   const handleSignup = async () => {
     try {
@@ -24,31 +26,34 @@ export default function Signup(props) {
           number_plate,
         });
         if (response && response.data && response.data.usertoken) {
-          if (cookies.get("authortoken")) {
-            cookies.remove("authortoken");
+          if (cookies.get("analysttoken")) {
+            cookies.remove("analysttoken");
           }
           
           const { usertoken } = response.data;
           // Save user token in cookies
           cookies.set("usertoken", usertoken, { path: "/" });
           // Redirect to user dashboard upon successful signup
-          navigate("/userdashboard");
+          window.location.href = "/userdashboard";
         }
-      } else if (props.name === "author") {
-        response = await axios.post("http://127.0.0.1:8000/author/signup", {
+      } else if (props.name === "analyst") {
+        response = await axios.post("http://127.0.0.1:8000/analyst/signup", {
           officialId,
+          name,
+          location,
+          contact,
           password,
         });
-        if (response && response.data && response.data.authortoken) {
+        if (response && response.data && response.data.analysttoken) {
 
           if (cookies.get("usertoken")) {
             cookies.remove("usertoken");
           }
-          const { authortoken } = response.data;
-          // Save author token in cookies
-          cookies.set("authortoken", authortoken, { path: "/" });
-          // Redirect to author page upon successful signup
-          navigate("/authorpage");
+          const { analysttoken } = response.data;
+          // Save analyst token in cookies
+          cookies.set("analysttoken", analysttoken, { path: "/" });
+          // Redirect to analyst page upon successful signup
+          window.location.href = "/analystpage";
         }
       }
     } catch (error) {
@@ -97,7 +102,7 @@ export default function Signup(props) {
                 onChange={(e) => setCarNumberPlate(e.target.value)}
               />
             </>
-          ) : props.name === "author" ? (
+          ) : props.name === "analyst" ? (
             <>
               <input
                 className="input"
@@ -109,11 +114,35 @@ export default function Signup(props) {
               />
               <input
                 className="input"
+                type="text"
+                id="username"
+                placeholder="Enter Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+              <input
+                className="input"
                 type="password"
                 id="password"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+              />
+              <input
+                className="input"
+                type="text"
+                id="location"
+                placeholder="Location"
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+              />
+              <input
+                className="input"
+                type="text"
+                id="contact"
+                placeholder="Contact"
+                value={contact}
+                onChange={(e) => setContact(e.target.value)}
               />
             </>
           ) : null}

@@ -40,16 +40,33 @@
   width: 18.75rem;
   height: 2.8125rem;
   margin-bottom: 0.625rem;
+  font-family: "Lexend Deca";
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  color:#d9d9d9;
   border: none; /* Remove border */
   border-radius: 0.625rem;
   background: rgba(34, 73, 87, 0.8);
   padding-left: 1rem;
   margin: 1rem;
+
 }
+
+/* .input::placeholder {
+  color: #d9d9d9;
+  text-align: flex-start;
+  font-family: "Lexend Deca";
+  font-size: 1.375rem;
+  font-style: normal;
+  font-weight: 200;
+  line-height: normal;
+} */
 
 /* Styling the placeholder */
 .SignIn .container input::placeholder {
-  color: #fff; /* White placeholder text */
+  color: #d9d9d9;
   text-align: left;
   font-family: "Lexend Deca";
   font-size: 0.875rem;

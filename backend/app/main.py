@@ -1,5 +1,7 @@
 from fastapi import FastAPI
-from views import user_views , admin_views
+from views import analyst_views
+from views import user_views
+from views import admin_views
 from database.connection import engine
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -15,7 +17,8 @@ app.add_middleware(
 
 # Include routers
 app.include_router(user_views.router,prefix="/user")
-app.include_router(admin_views.router,prefix="/author")
+app.include_router(analyst_views.router,prefix="/analyst")
+app.include_router(admin_views.router,prefix="/admin")
 
 
 

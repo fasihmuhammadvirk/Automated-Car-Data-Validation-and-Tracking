@@ -165,12 +165,12 @@ export default function Notification(props) {
   if (loading) {
     return (
       <>
-      <Navbar name={`${props.name}`} />;
-      <div class="notifications">
-        <div className="container">
-          <h2>Loading...</h2>
+        <Navbar name={`${props.name}`} />;
+        <div class="notifications">
+          <div className="container">
+            <h2>Loading...</h2>
+          </div>
         </div>
-      </div>
       </>
     );
   }
@@ -178,12 +178,12 @@ export default function Notification(props) {
   if (error) {
     return (
       <>
-      <Navbar name={`${props.name}`} />;
-      <div class="notifications">
-        <div className="container">
-          <h2>Error: {error.message}</h2>
+        <Navbar name={`${props.name}`} />;
+        <div class="notifications">
+          <div className="container">
+            <h2>Error: {error.message}</h2>
+          </div>
         </div>
-      </div>
       </>
     );
   }

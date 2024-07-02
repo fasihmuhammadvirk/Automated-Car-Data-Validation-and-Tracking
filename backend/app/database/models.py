@@ -59,11 +59,34 @@ class Admin_Info(Base):
     
     id = Column(Integer(),primary_key=True) 
     official_id = Column(String(100),nullable = False)
+    name = Column(String(100),nullable = False)
+    location = Column(String(100),nullable = False)
+    contact = Column(String(100),nullable = False)
     hash_password = Column(String(400),nullable=False) 
-    
+    notifications = Column(Text, nullable=True)
     
     def to_dict(self):
         
         return {
+            'name' : self.name,
             'official_id': self.official_id,
-            'hash_password': self.hash_password}
+            'location': self.location,
+            'contact': self.contact,
+            }
+        
+class Administrator(Base):
+    
+    __tablename__ = "administrator"
+    
+    id = Column(Integer(),primary_key=True) 
+    hash_password = Column(String(400),nullable=False)
+
+    def to_dict(self):
+        
+        return {
+            'id': self.id,
+            'hash_password': self.name,
+        }
+    
+    def __repr__(self):
+        return f"<Administrator Id { self.id } Administrator Cnic {self.cnic}>"

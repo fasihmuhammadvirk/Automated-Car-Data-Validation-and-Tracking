@@ -67,13 +67,13 @@ td {
 }
 
 .message {
-color: #514848;
-text-align: left;
-font-family: "Lexend Deca";
-font-size: 18px;
-font-style: normal;
-font-weight: 300;
-line-height: normal;
+  color: #000;
+  text-align: center;
+  font-family: "Lexend Deca";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 }
 
 .status {
