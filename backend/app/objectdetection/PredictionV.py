@@ -252,9 +252,8 @@ def yolo_predictions(image):
     else:
         return 'Number Plate Not Detected', 'Number Plate Not Detected', 0
 
-
-
-
+            
+            
 
 def get_number_plate(image):
     image = cv2.imread(image)

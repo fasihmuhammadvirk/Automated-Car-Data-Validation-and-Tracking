@@ -23,8 +23,14 @@ def get_hashed_password(password: str) -> str:
 def verify_password(password: str, hashed_pass: str) -> bool:
     return password_context.verify(password, hashed_pass)
 
-def create_access_token(subject: Union[str, Any]) -> str:
+def create_access_token_user(subject: Union[str, Any]) -> str:
+    
     to_encode = {"cnic": str(subject[0]),"number_plate": str(subject[1])}
+    encoded_jwt = jwt_encode(to_encode, JWT_SECRET_KEY, ALGORITHM)
+    return encoded_jwt
+
+def create_access_token(subject: Union[str, Any]) -> str:
+    to_encode = {"official_id": str(subject)}
     encoded_jwt = jwt_encode(to_encode, JWT_SECRET_KEY, ALGORITHM)
     return encoded_jwt
 

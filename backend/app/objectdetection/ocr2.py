@@ -35,7 +35,7 @@ def perform_ocr(image):
     opener = urllib.request.build_opener(urllib.request.HTTPSHandler(context=ssl_context))
     urllib.request.install_opener(opener)
     # Initialize EasyOCR reader with GPU support
-    reader = easyocr.Reader(['en'],download_enabled=True,model_storage_directory= '/Users/fasihmuhammadvirk/Desktop/Github/Automated-Car-Data-Validation-and-Tracking/backend/objectdetection/', gpu=True) 
+    reader = easyocr.Reader(['en'],download_enabled=True,model_storage_directory= '/Users/fasihmuhammadvirk/Desktop/Github/Automated-Car-Data-Validation-and-Tracking/backend/app/objectdetection/', gpu=True) 
         # Configure SSL context to use certifi certificates
 
     # Perform OCR

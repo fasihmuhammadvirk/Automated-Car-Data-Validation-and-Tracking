@@ -2,10 +2,12 @@ from database.connection import Session
 from database.models import Record as Car_Record
 from fastapi import HTTPException, status, UploadFile
 from objectdetection import PredictionV as p
+from objectdetection import ocr2 as o
 from typing import Optional
 import shutil
 import tempfile
 import os
+import cv2
 
 db = Session()
 
@@ -32,7 +34,9 @@ def get_car_detail_image(image: UploadFile):
     
     try:
         # Use the temporary file path in your existing logic
-        text = p.get_number_plate(temp_file_path)
+        # acc, text = p.get_number_plate(temp_file_path)
+        image = cv2.imread(temp_file_path)
+        text = o.perform_ocr(image=image)
         db_car = db.query(Car_Record).filter(Car_Record.number_plate == text).first()
         if not db_car:
             # return text

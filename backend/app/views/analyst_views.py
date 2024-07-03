@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, status, WebSocket
 from controllers import analyst_controller 
 from typing import List
-from models.analyst_model import SignupInfo, LoginInfo, CheckFeed,Notification
+from models.analyst_model import SignupInfo, LoginInfo, CheckFeed,Notification, AnalystNotification
 from fastapi.responses import StreamingResponse
 from controllers.camera_feed_controller import generate_video_stream, get_number_plate
 import asyncio
@@ -42,6 +42,14 @@ async def stop_video_feed():
 def get_car_data():
     return get_number_plate(video_stream)
 
-@router.post('/get_analyst_notifications', status_code=status.HTTP_200_OK, tags=['Analyst Notifications'])
+@router.post('/get_notifications', status_code=status.HTTP_200_OK, tags=['Analyst Notifications'])
 def get_analyst_notifications(notification:Notification):
     return analyst_controller.get_analyst_notifications(notification.dict())
+
+@router.post('/send_notification', status_code=status.HTTP_200_OK, tags=['Analyst Notifications'])
+def send_notification(status: AnalystNotification):
+    return analyst_controller.send_notification(status.dict())
+
+@router.post('/retrived_car_notification', status_code=status.HTTP_200_OK, tags=['Car Detail'])
+def retrived_car(status: AnalystNotification):
+    return analyst_controller.report_recoverd_stolen_car(status.dict())

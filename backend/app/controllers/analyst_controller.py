@@ -16,7 +16,6 @@ def create_analyst(Admin_info: dict):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Admin Already Exist")
 
     hashed_password = get_hashed_password(Admin_info['password'])
-    jwt_access = create_access_token(Admin_info['official_id'])
     new_Admin = Admin( official_id = Admin_info['official_id'], hash_password=hashed_password, name = Admin_info['name'], location = Admin_info['location'], contact = Admin_info['contact'])
     db.add(new_Admin)
     db.commit()
@@ -38,12 +37,13 @@ def login_analyst(Admin_info: dict):
 
 def get_analyst_notifications(notification: dict):
     admin_info = decode_access_token(notification['token'])
-    user = db.query(Admin).filter( Admin.official_id ==     admin_info['official_id']).first()
+    user = db.query(Admin).filter( Admin.official_id == admin_info['official_id']).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
-    notifications = user.notifications.split('\n') if user.notifications else []
+    notifications = user.notifications.split('\n') if user.notifications else ["No Notifications"]
     notifications.reverse()
     return {'notifications': notifications}
+    
 
 def send_notification(status: dict):
     admin_info = decode_access_token(status['token'])
@@ -53,20 +53,31 @@ def send_notification(status: dict):
     if not admin:
         raise HTTPException(status_code=404, detail="User not found")
     
-    admin_notification_message = f"{admin.name} Car {db_car.number_plate} Stolen is Retrived at  {datetime.now()} on {admin.location}"
-    if user.notifications:
-        user.notifications += f"\n{admin_notification_message}"
-    else:
-        user.notifications = admin_notification_message
 
     
     db_car = db.query(Car_Record).filter(Car_Record.number_plate == number_plate).first()
     if not db_car:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="No Car Detail to Fetch")
+    
     user = db.query(User).filter(User.cnic == db_car.owner_cnic).first()
     
+
+    if db_car.is_stolen:
+        admin_notification_message = f"{admin.name} a Stolen Car {db_car.number_plate} is Passed at {datetime.now()} from {admin.location}"
+    else:
+        admin_notification_message = f"{admin.name} a Stolen Car {db_car.number_plate} is Passed at {datetime.now()} from {admin.location}"
+
+    if admin.notifications:
+        admin.notifications += f"\n{admin_notification_message}"
+    else:
+        admin.notifications = admin_notification_message
+
     
-    user_notification_message = f"Your Car {db_car.number_plate} is Retived as Stolen at {datetime.now()} on {admin.location} by {admin.name}: Call {admin.contact}" 
+    if db_car.is_stolen:
+        user_notification_message = f"Your Car {db_car.number_plate} Stolen is Passed at {datetime.now()} from {admin.location}: Call {admin.contact} for more details"
+    else:
+        user_notification_message = f"Your Car {db_car.number_plate} is Passed at {datetime.now()} from {admin.location}: Call {admin.contact} for more details" 
+    
     if user.notifications:
         user.notifications += f"\n{user_notification_message}"
     else:
@@ -92,6 +103,13 @@ def report_recoverd_stolen_car(status: dict):
         user.notifications += f"\n{notification_message}"
     else:
         user.notifications = notification_message
+        
+    admin_notification_message = f"{admin.name} a Stolen Car {db_car.number_plate} is Retrieved at {datetime.now()} from {admin.location}"
+    if admin.notifications:
+        admin.notifications += f"\n{admin_notification_message}"
+    else:
+        admin.notifications = admin_notification_message
+
     db_car.is_stolen = False
     db.commit()
     return True

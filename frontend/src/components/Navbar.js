@@ -12,7 +12,7 @@ export default function Navbar(props) {
     } else if (props.name === "Analyst") {
       cookies.remove("analysttoken");
       window.location.href = "/";
-    } else {
+    } else if (props.name === "Admin") {
       cookies.remove("admintoken");
       window.location.href = "/";
     }
@@ -41,7 +41,12 @@ export default function Navbar(props) {
                 User List
               </Link>
             </>
-          ) : null}
+          ) : <>
+          <Link id="link" to={"/analystnotification"}>
+                Notification
+              </Link>
+          
+          </>}
         </div>
         <div className="singout">
           <button id="signout" onClick={handleSignout}>

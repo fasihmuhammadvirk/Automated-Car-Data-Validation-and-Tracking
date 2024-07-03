@@ -20,3 +20,7 @@ class CheckFeed(BaseModel):
 
 class Notification(BaseModel):
     token : str
+    
+class AnalystNotification(BaseModel):
+    token : str
+    number_plate : str

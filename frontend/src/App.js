@@ -43,6 +43,7 @@ function App() {
         {analysttoken && (
         <>
         <Route exact path="/analystdashboard" element={< AnalystDashboard />} />
+        <Route exact path="/analystnotification" element={<Notification name="Analyst" />} />
         </>)}
 
         {/* Render 404 page if neither usertoken nor analysttoken exist */}
