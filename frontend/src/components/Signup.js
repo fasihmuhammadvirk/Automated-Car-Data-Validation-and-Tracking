@@ -147,7 +147,7 @@ export default function Signup(props) {
             </>
           ) : null}
           <div className="signuplink">
-            <Link className="link" to="/signinuser">
+            <Link className="link" to="/loginuser">
               Already have an Account?
             </Link>
           </div>

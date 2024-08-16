@@ -1,5 +1,7 @@
 from fastapi import FastAPI, WebSocket,HTTPException, status
 from fastapi.responses import HTMLResponse
+from starlette import status
+from fastapi import HTTPException
 from objectdetection.PredictionV import yolo_predictions, get_number_plate
 from objectdetection.ocr2 import perform_ocr
 import cv2
@@ -39,8 +41,8 @@ def get_number_plate(video_stream):
                     return car_data
 
 
-def generate_video_stream(video_stream):   
-    while video_stream is not None:
+def generate_video_stream(video_stream):
+    while video_stream.isOpened():
         ret, frame = video_stream.read()
         if not ret:
             break

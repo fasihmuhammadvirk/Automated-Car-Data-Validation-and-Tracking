@@ -1,10 +1,13 @@
-from fastapi import APIRouter, Depends, status, WebSocket
+from fastapi import APIRouter, Depends, WebSocket
 from controllers import analyst_controller 
+from starlette import status
+from fastapi import HTTPException
 from typing import List
 from models.analyst_model import SignupInfo, LoginInfo, CheckFeed,Notification, AnalystNotification
 from fastapi.responses import StreamingResponse
 from controllers.camera_feed_controller import generate_video_stream, get_number_plate
 import asyncio
+import cv2
 
 router = APIRouter()
 
@@ -19,7 +22,7 @@ def login(Admin_Info: LoginInfo):
     # Only 'cnic' and 'password' are required for login
     return analyst_controller.login_analyst(Admin_Info.dict())
 
-import cv2
+
 video_stream = None
 
 @router.get('/video_feed')
@@ -35,7 +38,8 @@ async def stop_video_feed():
     if video_stream is not None:
         video_stream.release()
         video_stream = None
-    return 'Video stream stopped successfully.'
+    return {'message': 'Video stream stopped successfully.'}
+
         
 
 @router.get('/get_car_data', status_code=status.HTTP_200_OK, tags=['Car Detail'])
@@ -47,9 +51,9 @@ def get_analyst_notifications(notification:Notification):
     return analyst_controller.get_analyst_notifications(notification.dict())
 
 @router.post('/send_notification', status_code=status.HTTP_200_OK, tags=['Analyst Notifications'])
-def send_notification(status: AnalystNotification):
-    return analyst_controller.send_notification(status.dict())
+def send_notification(state: AnalystNotification):
+    return analyst_controller.send_notification(state.dict())
 
 @router.post('/retrived_car_notification', status_code=status.HTTP_200_OK, tags=['Car Detail'])
-def retrived_car(status: AnalystNotification):
-    return analyst_controller.report_recoverd_stolen_car(status.dict())
+def retrived_car(state: AnalystNotification):
+    return analyst_controller.report_recoverd_stolen_car(state.dict())

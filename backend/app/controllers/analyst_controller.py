@@ -45,9 +45,9 @@ def get_analyst_notifications(notification: dict):
     return {'notifications': notifications}
     
 
-def send_notification(status: dict):
-    admin_info = decode_access_token(status['token'])
-    number_plate = status['number_plate']
+def send_notification(state: dict):
+    admin_info = decode_access_token(state['token'])
+    number_plate = state['number_plate']
     
     admin = db.query(Admin).filter( Admin.official_id ==     admin_info['official_id']).first()
     if not admin:
@@ -57,7 +57,8 @@ def send_notification(status: dict):
     
     db_car = db.query(Car_Record).filter(Car_Record.number_plate == number_plate).first()
     if not db_car:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="No Car Detail to Fetch")
+        # raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="No Car Detail to Fetch")
+        return None
     
     user = db.query(User).filter(User.cnic == db_car.owner_cnic).first()
     
@@ -86,9 +87,9 @@ def send_notification(status: dict):
     db.commit()
     return True
 
-def report_recoverd_stolen_car(status: dict):
-    admin_info = decode_access_token(status['token'])
-    number_plate = status['number_plate']
+def report_recoverd_stolen_car(state: dict):
+    admin_info = decode_access_token(state['token'])
+    number_plate = state['number_plate']
         
     admin = db.query(Admin).filter( Admin.official_id ==     admin_info['official_id']).first()
     if not admin:

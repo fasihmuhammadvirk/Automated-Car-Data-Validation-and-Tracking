@@ -11,6 +11,6 @@ def get_user_notifications(notification: dict):
     user = db.query( User).filter( User.cnic == user_info['cnic']).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
-    notifications = user.notifications.split('\n') if user.notifications else []
+    notifications = user.notifications.split('\n') if user.notifications else ["No Notifications"]
     notifications.reverse()
     return {'notifications': notifications}

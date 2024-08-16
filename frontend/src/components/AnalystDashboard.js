@@ -15,9 +15,13 @@ export default function AnalystDashboard() {
   const startStreaming = () => {
     const videoElement = videoRef.current;
     videoElement.src = "http://localhost:8000/analyst/video_feed";
+    videoElement.onerror = () => {
+      setTimeout(startStreaming, 3000); //Retry after 3 seconds
+    };
     setStreaming(true);
     startPolling();
   };
+  
 
   const stopStreaming = () => {
     window.location.reload();
@@ -40,7 +44,7 @@ export default function AnalystDashboard() {
       .then((response) => {
         if (response.data && JSON.stringify(response.data) !== JSON.stringify(carData)) {
           setCarData(response.data);
-          sendNotification(response.data); // Call sendNotification when carData is fetched
+          sendNotification(response.data);
           if (response.data.is_stolen) {
             setShowRetrieveButton(true);
           } else {
@@ -52,6 +56,7 @@ export default function AnalystDashboard() {
         console.error("Error fetching car data:", error);
       });
   };
+  
 
   const sendNotification = (carData) => {
     const analystToken = cookies.get("analysttoken");
@@ -86,16 +91,18 @@ export default function AnalystDashboard() {
   };
 
   const startPolling = () => {
-    pollingIntervalRef.current = setInterval(fetchCarData, 7000); // Fetch data every 7 seconds
+    if (!pollingIntervalRef.current) {
+      pollingIntervalRef.current = setInterval(fetchCarData, 7000); // Fetch data every 7 seconds
+    }
   };
-
+  
   const stopPolling = () => {
     if (pollingIntervalRef.current) {
       clearInterval(pollingIntervalRef.current);
       pollingIntervalRef.current = null;
     }
   };
-
+  
   useEffect(() => {
     return () => {
       // Cleanup on component unmount
